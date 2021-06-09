@@ -4,11 +4,12 @@ const { validationResult } = require ('express-validator');
 const { promiseImpl } = require('ejs')
 
 module.exports = {
-    create: (req,res) => {
+    create (req ,res) {
         db.genres.findAll()
             .then((genres) => res.render('create' , { genres }))
-    },
-    add(req,res) {
+    } ,
+
+    add (req ,res) {
         let errors = validationResult(req);
 
         if (!errors.isEmpty()) {
@@ -20,16 +21,11 @@ module.exports = {
             genre_id: req.body.genre ,
             actor_: req.body.actors
         });
-
-         res.redirect('/')
-        }
-        
-        
-       
-        
-         
+            res.redirect('/')
+        }  
     } ,   
-    edit(req,res) {
+
+    edit (req, res) {
         const id = req.params.id
         
         Promise.all ([
@@ -43,7 +39,8 @@ module.exports = {
         })
 
     } ,
-    editProcess : (req , res ) => {
+
+    editProcess (req , res )  {
         const { id } = req.params
         const { name, genre_id , actor_id } =  req.body
         const errors = validationResult(req)
@@ -52,27 +49,28 @@ module.exports = {
             db.movies.findByPk(id)
                 .then(movie => {            
                         db.movies.update({
-                             title: req.body.title ,
+                            title: req.body.title ,
                             genre_id: req.body.genre ,
                             actor_id: req.body.actors
-                            },
+                        },
 
-                            {
-                             where: { id }
-                            })
+                        {
+                            where: { id }
+                        })
     
-                .then(() => {
-                    res.redirect('/')
-                })
-            })
-        }else {
+                            .then(() => {
+                                res.redirect('/')
+                            })
+                    })
+        } else { 
             db.movies.findAll()
                 .then(movies => {return res.render('edit' , {movies , errors: errors.mapped() , oldFormData: req.body})});
         }
 
                   
     },
-    delete(req,res){  
+
+    delete (req, res) {  
         
         db.movies.destroy({
             where: {
@@ -81,22 +79,25 @@ module.exports = {
         })
             .then(res.redirect('/'))
     } ,
-    list(req, res) {
+
+    list (req, res) {
         db.movies.findAll({attributes: ['id', 'title']})
             .then(movies => res.render('index' , { movies }));
     } ,
-    detail(req, res) {
+
+    detail (req, res) {
         db.movies.findByPk(req.params.id , {
             include: ["genre" , "actor"]
         })
             .then(movie => res.render('detail' , { movie }));
     } ,
-    registerForm(req,res) {
+
+    registerForm(req, res) {
         db.users.findAll()
             .then((users) => res.render('userRegister' , { users }))
-    },
+    } ,
 
-    register(req,res) {
+    register (req, res) {
         let errors = validationResult(req)
         let passwordHash = bcrypt.hashSync(req.body.password, 10) 
 
@@ -115,12 +116,13 @@ module.exports = {
         }
         
     },
-    login (req ,res){
+
+    login (req, res) {
         res.render('login');
-    },
-    loginAuth (req ,res){
+    } ,
+    loginAuth (req ,res) {
         let errors = validationResult(req);
-        // Si no hay errores,busca el usuario por email
+
         if (errors.isEmpty()) {
             
             db.users.findOne({
@@ -128,13 +130,13 @@ module.exports = {
                     email: req.body.email
                 }
             })
-            // Si el usuario existe y el password es correcto, inicia session y redirige a la pag. de productos
+            
             .then(user => {
                 if (user) {
                     if (bcrypt.compareSync(req.body.password, user.password)){
                         req.session.user = user
                         return res.redirect('/');
-                    // Si el password es incorrecto, muestra el error debajo del campo password (por seguridad)         
+                            
                     } else {
                         res.render('login', {
                             errors: {
@@ -148,7 +150,7 @@ module.exports = {
                         })
     
                     }
-                    // Si el email es incorrecto, muestra el error debajo del campo password (por seguridad)
+                    
                 } else {
                     res.render('login', {
                         errors: {
@@ -163,7 +165,7 @@ module.exports = {
                     })
                 }
             })
-          // Si hay errores de validacion en los campos, los muestra 
+
         } else {
             res.render('login', { 
             errors: errors.mapped(),
@@ -171,12 +173,14 @@ module.exports = {
             });
     }
         
-    },
-    logout(req,res){
+    } ,
+
+    logout (req, res) {
         req.session.destroy()
         res.redirect ('/')
     },
-    userDetail(req,res){
+
+    userDetail (req, res) {
         db.users.findByPk(req.params.id)
             .then(user => res.render('userDetail', { user }));
     }

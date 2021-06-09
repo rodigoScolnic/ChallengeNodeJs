@@ -1,14 +1,14 @@
 <%- include('head.ejs') %> 
 <body>
     <%- include('header.ejs') %> 
-    <h2><%= movie.title %></h2>
-    <% if(movie.genre_id == null){ %>
+    <h2><%= locals.movie && movie.title %></h2>
+    <% if(locals.movies && movie.genre_id == null){ %>
     <p><%= "Esta pelicula no tiene genero" %></p>
     <% }else{ %>
     <h3>Genero:</h3><p><%= movie.genre.name %></p> 
     <% } %>
     <h4>Actores: </h4>
-    <p><% movie.actor.forEach(element => { %>
+    <p><%locals.movie && movie.actor.forEach(element => { %>
         <div class="actors">
             <p><%=element.first_name + " " + element.last_name%></p>
         </div>

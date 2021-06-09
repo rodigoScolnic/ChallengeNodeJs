@@ -16,14 +16,12 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }))
-
 app.use(authUser);
 
 // Rutas
 const moviesRouter = require('./routes/moviesRouter')
-
 app.use('/', moviesRouter);
 
 
-// Iniciamos el servidor
+// Inicio el servidor
 app.listen(8080, () => { console.log('Servidor escuchando') });
