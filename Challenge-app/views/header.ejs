@@ -1,0 +1,18 @@
+<header>
+
+    <a class="logo" href="/">Movie<span>List</span>.com</a>
+
+    <% if (locals.user && user.rol == 1) { %>
+        <div><a class="btn" href="/create">crear</a></div>
+    <% } %>
+    
+    <div>
+        <a href="/userRegister">registrate</a>
+        <a href="/login">LogIn</a>
+        <% if (locals.user) { %>
+            <a href="/userDetail/<%= user.id %> "><%= user.name %></a>
+            <a href="/logout">logout</a>
+        <% } %>
+    </div>
+    
+</header>

@@ -1,0 +1,40 @@
+<%- include('head.ejs') %> 
+<body>
+    <%- include('header.ejs') %> 
+    <h2>Registrate </h2>
+    <form class="form-container" action="/userRegister" method="POST">
+        <div>
+            <label for="name">Nombre: </label>
+            <input type="text" name="name" value="<%= locals.oldFormData && oldFormData.name ? oldFormData.name : '' %>">
+            <% if (locals.errors && errors.name) { %>
+                <p class="error"><%= errors.name.msg %></p>
+            <% } %>
+        </div>
+        <div>
+            <label for="email">Email: </label>
+            <input type="email" name="email" value="<%= locals.oldFormData && oldFormData.email ? oldFormData.email : '' %>">
+            <% if (locals.errors && errors.email) { %>
+                <p class="error"><%= errors.email.msg %></p>
+            <% } %>
+        </div>
+        <div>
+            <label for="password">password: </label>
+            <input type="password" name="password">
+            <% if (locals.errors && errors.password) { %>
+                <p class="error"><%= errors.password.msg %></p>
+            <% } %>
+        </div>
+        <div>
+            <label for="rol">rol: </label>
+            <select name="rol" id="rol">
+                <option value="0">usuario comun</option>
+                <option value="1">administrador</option>
+            </select>
+        </div>
+        <div class="btn-card">
+            <button type="submit">registrame</button>
+        </div>
+
+    </form>
+</body>
+</html>

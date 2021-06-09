@@ -1,0 +1,12 @@
+<%- include('head.ejs') %> 
+<body>
+    <%- include('header.ejs') %>  
+       
+    <div class="list">
+        <h2>Listado de peliculas: </h2>
+        <% movies.forEach(movie => { %>
+        <a href="/<%= movie.id %>"><%=movie.title%></a>
+        <% }); %>
+    </div>  
+</body>
+</html>

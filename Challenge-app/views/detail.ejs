@@ -1,0 +1,25 @@
+<%- include('head.ejs') %> 
+<body>
+    <%- include('header.ejs') %> 
+    <h2><%= movie.title %></h2>
+    <% if(movie.genre_id == null){ %>
+    <p><%= "Esta pelicula no tiene genero" %></p>
+    <% }else{ %>
+    <h3>Genero:</h3><p><%= movie.genre.name %></p> 
+    <% } %>
+    <h4>Actores: </h4>
+    <p><% movie.actor.forEach(element => { %>
+        <div class="actors">
+            <p><%=element.first_name + " " + element.last_name%></p>
+        </div>
+    <% }); %></p>
+    <div class="btn-card">
+        <% if (locals.user && user.rol == 1) { %>
+            <a class="btn" href="/<%= movie.id %>/edit">editar</a>
+            <form action="/<%= movie.id %>/delete?_method=DELETE" method="POST"><button>borrar</button></form>
+        <% } %>
+        
+    </div>
+
+</body>
+</html>

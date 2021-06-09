@@ -1,0 +1,29 @@
+<%- include('head.ejs') %> 
+<body>
+    <%- include('header.ejs') %> 
+    <h2>Editar pelicula</h2>
+    <form class="form-container" action="/<%= movie.id %>/edit?_method=PUT" method="POST">
+        <div>
+            <label for="title">Titulo: </label>
+            <input type="text" name="title" value="<%= movie.title %>">
+        </div>
+        <div>
+            <label for="genre">Genero: </label>
+            <select name="genre">
+                <option value="<%= genres.id %>"><%= genres.name %> </option>
+                <% genres.forEach(element => { %>
+                    <option value="<%= element.id%> "><%= element.name %></option>
+                <% }); %>
+            </select>
+        </div>
+        <div>
+            <label for="actors">Actores: </label>
+            <input type="text" name="actors" value="<%= actors.name %> ">
+        </div>
+        <div class="btn-card">
+            <button type="submit">editar</button>
+        </div>
+
+    </form>
+</body>
+</html>

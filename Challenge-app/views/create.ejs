@@ -1,0 +1,39 @@
+<%- include('head.ejs') %> 
+<body>
+    <%- include('header.ejs') %> 
+    <h2>Crea una pelicula</h2>
+
+    
+    <form class="form-container" action="/create" method="POST">
+        <div>
+            <label for="title">Titulo: </label>
+            <input type="text" name="title" value="<%= locals.oldFormData && oldFormData.title ? oldFormData.title : '' %>">
+            <% if (locals.errors && errors.title) { %>
+                <p class="error"><%= errors.title.msg %></p>
+            <% } %>
+        </div>
+        <div>
+            <label for="genre">Genero: </label>
+            <select name="genre">
+                <option value="">Elije una opcion...</option>
+                <% genres.forEach(genre => { %>
+                    <option value="<%= genre.id%>"
+                        <%= locals.oldFormData && (genre.id == oldFormData.id) ? 'selected' : null %> >
+                    <%= genre.name %></option>
+                <% }); %>
+            </select>
+            <% if (locals.errors && errors.genre) { %>
+                <p class="error"><%= errors.genre.msg %></p>
+            <% } %>
+        </div>
+        <div>
+            <label for="actors">Actores: </label>
+            <input type="text" name="actors">
+        </div>
+        <div class="btn-card">
+            <button type="submit">crear</button>
+        </div>
+
+    </form>
+</body>
+</html>

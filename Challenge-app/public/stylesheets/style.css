@@ -1,0 +1,109 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: cornsilk;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 2px solid crimson;
+}
+
+header div a {
+  margin-right: 30px;
+}
+
+.list h2{
+  font-style: italic;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.list a {
+  text-decoration: none;
+  color: black;
+  margin: 10px 0;
+  border-bottom: 1px solid rgba(220, 20, 60, 0.329);
+  position: relative;
+  left: 0px;
+}
+
+.btn-card a , header a {
+  border: 2px solid crimson ;
+  border-radius: 5px;
+  padding: 3px; 
+  text-decoration: none;
+  color: black;
+}
+
+.btn-card a:hover {
+  border: 2px solid rgb(224, 91, 118);
+}
+
+.btn-card button {
+  border: 2px solid crimson ;
+  border-radius: 5px;
+  padding: 3px; 
+  text-decoration: none;
+  color: black;
+  background: none;
+}
+
+.btn-card {
+  display: flex;
+  justify-content: space-around;
+  width: 20%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+}
+
+.form-container div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.form-container label {
+  font-weight: bold;
+}
+
+.form-container input , .form-container select {
+  border: none;
+  border-bottom: 1px solid crimson;
+  background: none;
+}
+
+.error {
+  background-color: rgba(255, 166, 0, 0.411);
+  color: crimson;
+  width: 80% ;
+}
+
+.logo {
+  border: none;
+  font-size: 20px;
+  font-style: italic;
+
+}
+
+.logo span {
+  color: blue;
+  font-weight: bolder;
+}
+
+.roled {
+  color: green;
+}
+
+
+
